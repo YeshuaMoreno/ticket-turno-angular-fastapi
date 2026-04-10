@@ -8,6 +8,7 @@ from backend.services.ticket_service import TicketFactory
 from backend.services.qr_service import generar_qr
 from backend.services.pdf_service import generar_pdf
 from pydantic import BaseModel
+from sqlalchemy import asc
 
 router = APIRouter()
 
@@ -22,7 +23,7 @@ def get_db():
 # -------- MUNICIPIOS --------
 @router.get("/municipios")
 def obtener_municipios(db: Session = Depends(get_db)):
-    return db.query(Municipio).all()
+    return db.query(Municipio).order_by(Municipio.nombre).all()
 
 @router.post("/municipios")
 def crear_municipio(nombre: str, db: Session = Depends(get_db)):

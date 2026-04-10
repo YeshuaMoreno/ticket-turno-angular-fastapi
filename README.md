@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #  Sistema Web - Ticket de Turno
 
 Proyecto desarrollado para el **Examen Parcial 2** de Desarrollo Web.
@@ -97,3 +98,53 @@ ng serve
 
 Roberto Moreno
 Ingeniería en Sistemas Computacionales
+=======
+\# Ticket de Turno
+
+
+
+Sistema web desarrollado con Angular + FastAPI
+
+
+
+\## Funcionalidades
+
+\- Login con captcha
+
+\- Roles (admin / user)
+
+\- CRUD de tickets
+
+\- CRUD de municipios
+
+\- Dashboard con gráficas
+
+\- Generación de PDF con QR
+
+
+
+\## Tecnologías
+
+\- Angular
+
+\- FastAPI
+
+\- SQLAlchemy (ORM)
+
+\- MySQL
+
+
+
+\## Arquitectura
+
+\- Cliente-Servidor
+
+\- API REST
+
+
+
+\## Patrón de diseño
+
+\- Factory (TicketFactory)
+
+>>>>>>> 5c48f55 (README agregado)

@@ -1,0 +1,20 @@
+# Node
+node_modules/
+dist/
+
+# Angular
+.angular/
+
+# Python
+__pycache__/
+*.pyc
+
+# Env
+.env
+
+# VSCode
+.vscode/
+
+# PDFs generados
+*.pdf
+*.png

@@ -1,25 +1,28 @@
 from fastapi import FastAPI
-from backend.database import engine, Base
-from backend.routes import ticket_routes
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from backend.routes.ticket_routes import router
 
+from backend.database import engine, Base
+from backend.routes import ticket_routes, auth_routes
+
+# CREAR APP PRIMERO
 app = FastAPI()
 
-# Agregar middleware para permitir CORS
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
+# STATIC (para PDF / QR)
 app.mount("/static", StaticFiles(directory="."), name="static")
 
-# Crear tablas
+# CREAR TABLAS
 Base.metadata.create_all(bind=engine)
 
-# Registrar rutas
-app.include_router(router, prefix="/api")
+# RUTAS (UNA SOLA VEZ)
+app.include_router(ticket_routes.router, prefix="/api")
+app.include_router(auth_routes.router, prefix="/api")

@@ -1,0 +1,48 @@
+<div class="max-w-4xl mx-auto p-4 space-y-4">
+
+  <h2 class="text-xl font-bold">👥 Gestión de Usuarios</h2>
+
+  <!-- CREAR -->
+  <div class="flex flex-col md:flex-row gap-2">
+    <input [(ngModel)]="nuevo.username" placeholder="Usuario" class="border p-1">
+    <input [(ngModel)]="nuevo.password" placeholder="Password" class="border p-1">
+    <button (click)="crear()" class="bg-green-500 text-white px-2">Crear</button>
+  </div>
+
+  <!-- LISTA -->
+  <div class="overflow-x-auto">
+    <table class="w-full border mt-4">
+      <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+      </tr>
+  </div>
+
+    <tr *ngFor="let u of usuarios">
+      <td>{{ u.id }}</td>
+      <td>{{ u.username }}</td>
+
+      <td>
+        <select [(ngModel)]="u.rol" (change)="cambiarRol(u)">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </td>
+
+      <td>
+        <button (click)="eliminar(u.id)" class="bg-red-500 text-white px-2">
+          Eliminar
+        </button>
+      </td>
+
+        <button routerLink="/usuarios"
+                class="bg-purple-500 text-white px-3 py-2 rounded">
+          👥 Gestionar Usuarios
+        </button>
+        
+    </tr>
+  </table>
+
+</div>

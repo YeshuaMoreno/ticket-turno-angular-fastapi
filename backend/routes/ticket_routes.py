@@ -123,7 +123,36 @@ def actualizar_ticket(data: TicketUpdate, db: Session = Depends(get_db)):
     ticket.nombre = data.nombre
     db.commit()
 
-    return {"msg": "Actualizado"}
+    # regenerar QR y PDF
+    generar_qr(ticket.curp, f"qr_{ticket.id}.png")
+    generar_pdf(ticket, f"qr_{ticket.id}.png", f"ticket_{ticket.id}.pdf")
+
+    return {
+        "msg": "Actualizado",
+        "pdf": f"/static/ticket_{ticket.id}.pdf"
+    }
+
+@router.get("/tickets/pdf")
+def obtener_pdf(curp: str, turno: int, db: Session = Depends(get_db)):
+
+    ticket = db.query(Ticket).filter(
+        Ticket.curp == curp,
+        Ticket.turno == turno
+    ).first()
+
+    if not ticket:
+        raise HTTPException(status_code=404, detail="No encontrado")
+
+    return {
+        "pdf": f"/static/ticket_{ticket.id}.pdf"  # 🔥 CAMBIO AQUÍ
+    }
+
+@router.get("/tickets/search")
+def buscar(q: str, db: Session = Depends(get_db)):
+    return db.query(Ticket).filter(
+        (Ticket.nombre.ilike(f"%{q}%")) |
+        (Ticket.curp.ilike(f"%{q}%"))
+    ).all()
 
 # -------- dashboard --------
 

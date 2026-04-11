@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
   template: `
   <div class="max-w-5xl mx-auto p-4 space-y-6">
 
-    <h2 class="text-2xl font-bold text-center"> Panel Admin</h2>
+    <h2 class="text-2xl font-bold text-center">Panel Admin</h2>
 
     <div class="flex gap-2">
       <button routerLink="/dashboard" class="bg-blue-500 text-white px-3 py-2 rounded">
@@ -59,7 +59,8 @@ import { HttpClient } from '@angular/common/http';
               Eliminar
             </button>
 
-            <button (click)="cambiarStatus(t.id, 'Resuelto')" class="text-green-600">
+            <!-- 🔥 CORREGIDO AQUÍ -->
+            <button (click)="cambiarEstatus(t.id, 'Resuelto')" class="text-green-600">
               Resolver
             </button>
 
@@ -108,20 +109,25 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  eliminar(id: number) {
-    this.service.deleteTicket(id).subscribe(() => this.cargarTickets());
+  cambiarEstatus(id: number, estatus: string) {
+    this.http.put(
+      `http://127.0.0.1:8000/api/tickets/status/${id}?estatus=${estatus}`,
+      {}
+    ).subscribe(() => {
+      this.cargarTickets();
+    });
   }
 
-  cambiarStatus(id: number, estatus: string) {
-    this.http.put(`http://127.0.0.1:8000/api/tickets/status/${id}?estatus=${estatus}`, {})
-      .subscribe(() => this.cargarTickets());
+  eliminar(id: number) {
+    this.http.delete(
+      `http://127.0.0.1:8000/api/tickets/${id}`
+    ).subscribe(() => {
+      this.cargarTickets();
+    });
   }
 
   logout() {
-    // Limpia TODO
     localStorage.clear();
-
-    // Redirige al login
     this.router.navigate(['/login']);
   }
 }

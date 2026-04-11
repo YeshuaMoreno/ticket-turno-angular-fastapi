@@ -98,6 +98,11 @@ export class LoginComponent {
   }
 
   register() {
+    if (!this.username || !this.password) {
+      alert('Llena usuario y contraseña');
+      return;
+    }
+
     this.http.post('http://127.0.0.1:8000/api/register', {
       username: this.username,
       password: this.password

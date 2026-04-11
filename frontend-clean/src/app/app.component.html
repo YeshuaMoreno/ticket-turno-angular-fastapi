@@ -1,2 +1,27 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<div class="bg-gray-100 min-h-screen">
+
+  <!-- 🔥 NAVBAR GLOBAL -->
+    <div class="font-bold">
+      🎟 Ticket Turno
+    </div>
+
+    <div class="flex gap-4">
+
+      <a routerLink="/admin" class="hover:text-blue-400">🧾 Admin</a>
+
+      <a routerLink="/dashboard" class="hover:text-green-400">📊 Dashboard</a>
+
+      <a routerLink="/usuarios" class="hover:text-purple-400">👥 Usuarios</a>
+
+      <a routerLink="/municipios" class="hover:text-yellow-400">📂 Municipios</a>
+
+      <button (click)="logout()" class="hover:text-red-400">🚪 Salir</button>
+
+    </div>
+
+  </nav>
+
+  <!-- 🔥 AQUÍ SE RENDERIZAN LAS PÁGINAS -->
+  <router-outlet></router-outlet>
+
+</div>

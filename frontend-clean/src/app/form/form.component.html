@@ -1,7 +1,10 @@
-<div class="max-w-md mx-auto p-4 space-y-4">
+<div class="max-w-md mx-auto p-6 space-y-4 
+            bg-white rounded-2xl shadow-xl 
+            transition-all duration-300 hover:shadow-2xl">
 
-  <h2 class="text-xl font-bold text-center"> Crear Ticket</h2>
+  <h2 class="text-xl font-bold text-center">🎟 Crear Ticket</h2>
 
+  <!-- CREAR -->
   <input class="w-full border p-2 rounded"
          placeholder="Nombre"
          [(ngModel)]="form.nombre">
@@ -19,13 +22,22 @@
   </select>
 
   <button (click)="crear()"
-          class="w-full bg-blue-500 text-white p-2 rounded">
+          class="w-full bg-blue-500 text-white p-2 rounded 
+       hover:scale-105 transition transform">
     Generar Ticket
   </button>
 
+  <hr>
+
   <button (click)="logout()"
-          class="w-full bg-red-500 text-white p-2 rounded">
+          class="w-full bg-red-500 text-white p-2 rounded 
+       hover:scale-105 transition transform">
     Salir
+  </button>
+
+  <button (click)="irModificar()"
+              class="w-full bg-orange-500 text-white p-2 rounded">
+       ✏️ Ir a modificar ticket
   </button>
 
 </div>

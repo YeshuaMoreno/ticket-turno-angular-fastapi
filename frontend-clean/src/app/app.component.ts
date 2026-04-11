@@ -19,7 +19,12 @@ import { RouterModule } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private router: Router) {}
+  constructor(public router: Router) {}
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
 
   ngOnInit(): void {
 

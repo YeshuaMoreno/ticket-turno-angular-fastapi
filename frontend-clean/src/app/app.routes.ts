@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ModificarComponent } from './modificar/modificar.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -25,5 +26,10 @@ export const routes: Routes = [
       import('./admin-municipios/admin-municipios.component')
       .then(m => m.AdminMunicipiosComponent),
       canActivate: [AuthGuard]
-  }
+  },
+    {
+    path: 'modificar',
+    loadComponent: () => import('./modificar/modificar.component')
+        .then(m => m.ModificarComponent)
+    }
 ];

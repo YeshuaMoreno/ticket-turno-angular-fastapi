@@ -1,0 +1,27 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-xl space-y-4">
+
+  <h2 class="text-xl font-bold text-center">✏️ Modificar Ticket</h2>
+
+  <input [(ngModel)]="mod.curp" placeholder="CURP" class="w-full border p-2 rounded">
+  <input [(ngModel)]="mod.turno" type="number" placeholder="Turno" class="w-full border p-2 rounded">
+  <input [(ngModel)]="mod.nombre" placeholder="Nuevo nombre" class="w-full border p-2 rounded">
+
+  <button (click)="modificar()" class="w-full bg-blue-500 text-white p-2 rounded">
+    Modificar
+  </button>
+
+  <button (click)="descargarPDF()" class="w-full bg-green-500 text-white p-2 rounded">
+    Descargar PDF
+  </button>
+
+  <button (click)="verPreview()" class="w-full bg-gray-700 text-white p-2 rounded">
+    Ver Preview
+  </button>
+
+  <iframe *ngIf="previewPDF" [src]="previewPDF" class="w-full h-96 border mt-4"></iframe>
+
+  <button (click)="volver()" class="w-full bg-red-500 text-white p-2 rounded">
+    Volver
+  </button>
+
+</div>

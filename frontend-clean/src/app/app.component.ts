@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
 
     const role = localStorage.getItem('auth');
 
-    // 🔐 SOLO VALIDACIÓN GLOBAL
+    // SOLO VALIDACIÓN GLOBAL
     if (!role) {
       this.router.navigate(['/login']);
     }

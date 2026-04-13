@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   <div class="max-w-md mx-auto mt-20 p-6 border rounded shadow">
 
     <h2 class="text-2xl font-bold mb-4 text-center">
-      📝 Registro Usuario
+        Registro Usuario
     </h2>
 
     <input [(ngModel)]="usuario" placeholder="Usuario"

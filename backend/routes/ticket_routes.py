@@ -9,6 +9,8 @@ from backend.services.qr_service import generar_qr
 from backend.services.pdf_service import generar_pdf
 from pydantic import BaseModel
 from sqlalchemy import asc
+from backend.models.usuario import Usuario
+from backend.routes.auth_routes import LoginData
 
 router = APIRouter()
 
@@ -153,6 +155,26 @@ def buscar(q: str, db: Session = Depends(get_db)):
         (Ticket.nombre.ilike(f"%{q}%")) |
         (Ticket.curp.ilike(f"%{q}%"))
     ).all()
+
+@router.post("/register")
+def register(data: LoginData, db: Session = Depends(get_db)):
+    existe = db.query(Usuario).filter(
+        Usuario.username == data.username
+    ).first()
+
+    if existe:
+        raise HTTPException(status_code=400, detail="Usuario ya existe")
+
+    user = Usuario(
+        username=data.username,
+        password=data.password,
+        rol="user"
+    )
+
+    db.add(user)
+    db.commit()
+
+    return {"msg": "Usuario creado"}
 
 # -------- dashboard --------
 

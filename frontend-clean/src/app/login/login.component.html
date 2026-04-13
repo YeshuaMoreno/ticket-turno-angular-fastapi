@@ -7,15 +7,15 @@
     </h2>
 
     <input [(ngModel)]="username"
-      placeholder="Email address"
+      placeholder="Usuario"
       class="w-full border border-gray-300 p-2 rounded-full outline-none focus:ring-2 focus:ring-gray-400">
 
     <input [(ngModel)]="password"
       type="password"
-      placeholder="Password"
+      placeholder="Contraseña"
       class="w-full border border-gray-300 p-2 rounded-full outline-none focus:ring-2 focus:ring-gray-400">
 
-    <div class="text-sm text-gray-500">
+    <div class="text-sm text-gray-500 text-center">
       ¿Cuánto es {{num1}} + {{num2}}?
     </div>
 
@@ -27,6 +27,11 @@
     <button (click)="login()"
       class="w-full bg-black text-white py-2 rounded-full hover:bg-gray-800 transition">
       Login
+    </button>
+
+    <button routerLink="/register"
+      class="w-full bg-green-500 text-white py-2 rounded-full hover:bg-green-600 transition">
+      Crear cuenta
     </button>
 
     <div class="text-center text-sm text-gray-500 cursor-pointer hover:underline"

@@ -1,57 +1,42 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
   selector: 'app-register',
-  imports: [FormsModule, CommonModule],
-  template: `
-  <div class="max-w-md mx-auto mt-20 p-6 border rounded shadow">
-
-    <h2 class="text-2xl font-bold mb-4 text-center">
-        Registro Usuario
-    </h2>
-
-    <input [(ngModel)]="usuario" placeholder="Usuario"
-      class="w-full border p-2 mb-3 rounded">
-
-    <input [(ngModel)]="password" type="password" placeholder="Contraseña"
-      class="w-full border p-2 mb-3 rounded">
-
-    <button (click)="registrar()"
-      class="w-full bg-green-500 text-white py-2 rounded">
-      Registrarse
-    </button>
-
-  </div>
-  `
+  imports: [CommonModule, FormsModule, RouterModule],
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent {
-
-  usuario = '';
+  username = '';
   password = '';
 
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  registrar() {
+  crearCuenta() {
+    if (!this.username || !this.password) {
+      alert('Llena usuario y contraseña');
+      return;
+    }
 
-    fetch('http://127.0.0.1:8000/api/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
+    this.http.post<any>('http://127.0.0.1:8000/api/register', {
+      username: this.username,
+      password: this.password
+    }).subscribe({
+      next: () => {
+        alert('Usuario creado correctamente');
+        this.router.navigate(['/login']);
       },
-      body: JSON.stringify({
-        username: this.usuario,
-        password: this.password
-      })
-    })
-    .then(res => res.json())
-    .then(() => {
-      alert('Usuario registrado');
-      this.router.navigate(['/login']);
-    })
-    .catch(() => alert('Error'));
+      error: (err) => {
+        alert(err?.error?.detail || 'Error al crear cuenta');
+      }
+    });
+  }
+
+  volver() {
+    this.router.navigate(['/login']);
   }
 }
